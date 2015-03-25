@@ -18,7 +18,7 @@
 (global-set-key "\C-x\j\l" 'goto-line)
 (global-set-key "\C-x\C-c" 'save-buffers-kill-terminal)
 (global-set-key "\C-i" 'indent-region)
-
+(global-set-key "\C-x\C-i" 'indent-region)
 ;;
 (cua-mode t)
 (setq cua-enable-cua-keys nil)  ;
@@ -41,6 +41,11 @@
 )
 (add-hook 'web-mode-hook 'my-web-mode-hook)
 
+;;php-mode
+(add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
+;;php-complete
+;;(add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
+
 ;;direx, pop win
 (require 'popwin)
 (setq display-buffer-function 'popwin:display-buffer)
@@ -52,3 +57,11 @@
 (push '(direx:direx-mode :position left :width 25 :dedicated t)
       popwin:special-display-config)
 (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory-other-window)
+
+;;helm
+(require 'helm-config)
+(helm-mode 1)
+(custom-set-variables '(helm-ff-auto-update-initial-value nil))
+(define-key helm-read-file-map (kbd "C-h") 'delete-backward-char)
+(define-key helm-read-file-map (kbd "<tab>") 'helm-execute-persistent-action)
+
