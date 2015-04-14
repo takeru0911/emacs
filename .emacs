@@ -50,7 +50,8 @@
 ;;direx, pop win
 (require 'popwin)
 (setq display-buffer-function 'popwin:display-buffer)
-
+;;json mode
+(add-to-list 'auto-mode-alist '("\\.json$" . json-mode))
 (require 'direx)
 (setq direx:leaf-icon "  "
       direx:open-icon "▾ "
