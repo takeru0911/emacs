@@ -34,6 +34,7 @@
 
 ;;web-mode
 (add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.twig$" . web-mode))
 (defun my-web-mode-hook ()
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
@@ -56,7 +57,7 @@
       direx:closed-icon "▸ ")
 (push '(direx:direx-mode :position left :width 25 :dedicated t)
       popwin:special-display-config)
-(global-set-key (kbd "C-x C-j") 'direx:jump-to-directory-other-window)
+(global-set-key (kbd "C-x C-d") 'direx:jump-to-directory-other-window)
 
 ;;helm
 (require 'helm-config)
