@@ -1,5 +1,6 @@
 ;;load-path
 (setq load-path (cons "~/.emacs.d/elisp" load-path))
+(setq load-path (cons "~/.emacs.d/auto-java-complete" load-path))
 
 ;;helm-agpp
 (package-initialize)
@@ -25,8 +26,14 @@
 (setq auto-save-default nil)  ;
 (setq make-backup-files nil)  ; (cua-mode t)  ; cua-mode
 
+;;yasnippet
+(require 'yasnippet)
+(yas/global-mode 1)
 ;;auto-complete
 (global-auto-complete-mode t)
+;; auto-java-complete
+(require 'ajc-java-complete-config)
+(add-hook 'java-mode-hook 'ajc-java-complete-mode)
 
 ;;realtime-preview
 (autoload 'realtime-preview "realtime-preview" nil t)
@@ -54,8 +61,8 @@
 (add-to-list 'auto-mode-alist '("\\.json$" . json-mode))
 (require 'direx)
 (setq direx:leaf-icon "  "
-      direx:open-icon "▾ "
-      direx:closed-icon "▸ ")
+      direx:open-icon "> "
+      direx:closed-icon "< ")
 (push '(direx:direx-mode :position left :width 25 :dedicated t)
       popwin:special-display-config)
 (global-set-key (kbd "C-x C-d") 'direx:jump-to-directory-other-window)
