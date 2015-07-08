@@ -31,9 +31,6 @@
 (yas/global-mode 1)
 ;;auto-complete
 (global-auto-complete-mode t)
-;; auto-java-complete
-(require 'ajc-java-complete-config)
-(add-hook 'java-mode-hook 'ajc-java-complete-mode)
 
 ;;realtime-preview
 (autoload 'realtime-preview "realtime-preview" nil t)
