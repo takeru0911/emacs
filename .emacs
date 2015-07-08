@@ -7,6 +7,8 @@
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
+(set-language-environment "Japanese")
+
 ;; set key-bind
 (global-set-key "\C-h" 'delete-backward-char)
 (global-set-key "\C-h" 'delete-backward-char)
@@ -58,11 +60,12 @@
 (add-to-list 'auto-mode-alist '("\\.json$" . json-mode))
 (require 'direx)
 (setq direx:leaf-icon "  "
-      direx:open-icon "> "
-      direx:closed-icon "< ")
+      direx:open-icon "🔻"
+      direx:closed-icon "🔺")
 (push '(direx:direx-mode :position left :width 25 :dedicated t)
       popwin:special-display-config)
 (global-set-key (kbd "C-x C-d") 'direx:jump-to-directory-other-window)
+(global-set-key (kbd "C-x C-r") 'direx:find-directory)
 
 ;;helm
 (require 'helm-config)
@@ -70,4 +73,16 @@
 (custom-set-variables '(helm-ff-auto-update-initial-value nil))
 (define-key helm-read-file-map (kbd "C-h") 'delete-backward-char)
 (define-key helm-read-file-map (kbd "<tab>") 'helm-execute-persistent-action)
+(define-key global-map (kbd "C-x C-h") 'helm-recentf)
+;;dirtree
+(require 'dirtree)
 
+;;eproject
+(require 'eproject)
+(defun ep-dirtree ()
+  (interactive)
+    (dirtree eproject-root t))
+
+;;recentf
+(require 'recentf)
+(recentf-mode 1)
