@@ -83,6 +83,14 @@
   (interactive)
     (dirtree eproject-root t))
 
-;;recentf
-(require 'recentf)
-(recentf-mode 1)
+;;auto recent save
+(when (require 'recentf nil t)
+  (setq recentf-max-saved-items 2000)
+  (setq recentf-exclude '(".recentf"))
+  (setq recentf-auto-cleanup 10)
+  (setq recentf-auto-save-timer
+	(run-with-idle-timer 30 t 'recentf-save-list))
+    (recentf-mode 1))
+
+;;indent
+(setq-default tab-width 2 indent-tabs-mode nil)
