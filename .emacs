@@ -11,7 +11,6 @@
 
 ;; set key-bind
 (global-set-key "\C-h" 'delete-backward-char)
-(global-set-key "\C-h" 'delete-backward-char)
 (global-set-key "\C-x\9" 'delete-window)
 (global-set-key "\C-x\1" 'delete-other-windows)
 (global-set-key "\C-x\2" 'split-window)
@@ -30,7 +29,6 @@
 
 ;;yasnippet
 (require 'yasnippet)
-(yas/global-mode 1)
 ;;auto-complete
 (global-auto-complete-mode t)
 
@@ -86,3 +84,46 @@
 ;;recentf
 (require 'recentf)
 (recentf-mode 1)
+
+(require 'undo-tree)
+(global-undo-tree-mode t)
+(global-set-key (kbd "C-x C-\\") 'undo-tree-redo)
+
+(global-anzu-mode +1)
+
+(require 'smartparens-config)
+
+(smartparens-global-mode t)
+
+(global-hl-line-mode t)
+(show-paren-mode 1)
+(setq show-paren-delay 0)
+(setq show-paren-style 'expression)
+(set-face-attribute 'show-paren-match-face nil
+		    :background nil
+		    :foreground nil
+		    :underline "#ffff00"
+		    :weight 'extra-bold)
+
+(require 'multiple-cursors)
+(require 'smartrep)
+(declare-function smartrep-define-key "smartrep")
+(global-set-key (kbd "C-M-c") 'mc/edit-lines)
+(global-set-key (kbd "C-*")   'mc/mark-all-like-this)
+(global-unset-key "\C-t")
+(smartrep-define-key global-map "C-t"
+                             '(("C-p"      . 'mc/mark-previous-like-this)
+                               ("C-n"      . 'mc/mark-next-like-this)
+                               ("u" . mc/unmark-next-like-this)
+                               ("U" . mc/unmark-previous-like-this)
+                               ("s" . mc/skip-to-next-like-this)
+                               ("S" . mc/skip-to-previous-like-this)
+                               ("*"        . 'mc/mark-all-like-this)))
+(set-face-foreground 'mode-line "white")
+(set-face-background 'mode-line "DarkSlateBlue")
+
+(require 'auto-highlight-symbol)
+(global-auto-highlight-symbol-mode t)
+(ahs-set-idle-interval 0.5)
+
+
