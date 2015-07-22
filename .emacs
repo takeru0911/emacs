@@ -140,3 +140,4 @@
 
 (require 'rainbow-blocks)
 (global-rainbow-blocks-mode t)
+(menu-bar-mode 0)
