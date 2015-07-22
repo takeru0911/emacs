@@ -1,4 +1,10 @@
-((("global-rainbow-blocks-mode" .
+((("$data" .
+   [0 0 0 0 1])
+  ("self" .
+   [1 0 0 0])
+  ("this" .
+   [1 0 0 0])
+  ("global-rainbow-blocks-mode" .
    [0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
   ("require" .
    [1 0 0 0 0 0 0])
