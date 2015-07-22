@@ -3828,13 +3828,13 @@
        [(2 11 0)
 	nil "A modern list library for Emacs" single])
  (dart-mode .
-	    [(0 13)
+	    [(0 14)
 	     ((cl-lib
 	       (0 5))
 	      (dash
 	       (2 10 0))
 	      (flycheck
-	       (0 24)))
+	       (0 23)))
 	     "Major mode for editing Dart files" single])
  (d-mode .
 	 [(2 0 4)

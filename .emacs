@@ -106,16 +106,25 @@
 (require 'smartparens-config)
 
 (smartparens-global-mode t)
+(defface hlline-face
+  '((((class color)
+      (background dark))
+     (:background "dark slate gray"))
+    (((class color)
+      (background light))
+     (:background "#CC0066"))
+    (t
+     ()))
+  "*Face used by hl-line.")
+(setq hl-line-face 'hlline-face)
+(global-hl-line-mode)
 
-(global-hl-line-mode t)
 (show-paren-mode 1)
 (setq show-paren-delay 0)
 (setq show-paren-style 'expression)
 (set-face-attribute 'show-paren-match-face nil
-		    :background nil
-		    :foreground nil
-		    :underline "#ffff00"
-		    :weight 'extra-bold)
+                    :background nil :foreground nil
+                                        :underline "#ffff00" :weight 'extra-bold)
 
 (require 'multiple-cursors)
 (require 'smartrep)
@@ -132,7 +141,6 @@
                                ("S" . mc/skip-to-previous-like-this)
                                ("*"        . 'mc/mark-all-like-this)))
 (set-face-foreground 'mode-line "white")
-(set-face-background 'mode-line "DarkSlateBlue")
 
 (require 'auto-highlight-symbol)
 (global-auto-highlight-symbol-mode t)
@@ -141,3 +149,7 @@
 (require 'rainbow-blocks)
 (global-rainbow-blocks-mode t)
 (menu-bar-mode 0)
+
+(require 'color-theme)
+(color-theme-initialize)
+(color-theme-clarity)
