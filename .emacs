@@ -8,7 +8,7 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
 (set-language-environment "Japanese")
-
+(setq-default c-basic-offset 2)
 ;; set key-bind
 (global-set-key "\C-h" 'delete-backward-char)
 (global-set-key "\C-x\9" 'delete-window)
@@ -44,7 +44,7 @@
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2)
-)
+  )
 (add-hook 'web-mode-hook 'my-web-mode-hook)
 
 ;;php-mode
@@ -54,7 +54,7 @@
              (setq tab-width 2)
              (setq indent-tabs-mode t)
              (setq c-basic-offset 2)
-                ))
+             ))
 ;;php-complete
 ;;(add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
 
@@ -86,7 +86,7 @@
 (require 'eproject)
 (defun ep-dirtree ()
   (interactive)
-    (dirtree eproject-root t))
+  (dirtree eproject-root t))
 
 ;;auto recent save
 (when (require 'recentf nil t)
@@ -94,8 +94,8 @@
   (setq recentf-exclude '(".recentf"))
   (setq recentf-auto-cleanup 10)
   (setq recentf-auto-save-timer
-	(run-with-idle-timer 30 t 'recentf-save-list))
-    (recentf-mode 1))
+        (run-with-idle-timer 30 t 'recentf-save-list))
+  (recentf-mode 1))
 
 ;;indent
 (setq-default tab-width 2 indent-tabs-mode nil)
@@ -111,7 +111,7 @@
 (global-anzu-mode +1)
 
 (require 'smartparens-config)
- 
+
 (smartparens-global-mode t)
 
 
@@ -121,26 +121,26 @@
 (setq show-paren-delay 0)
 
 
-;(require 'multiple-cursors)
+                                        ;(require 'multiple-cursors)
 (require 'smartrep)
 (declare-function smartrep-define-key "smartrep")
 (global-set-key (kbd "C-M-c") 'mc/edit-lines)
 (global-set-key (kbd "C-*")   'mc/mark-all-like-this)
 (global-unset-key "\C-t")
 (smartrep-define-key global-map "C-t"
-                             '(("C-p"      . 'mc/mark-previous-like-this)
-                               ("C-n"      . 'mc/mark-next-like-this)
-                               ("u" . mc/unmark-next-like-this)
-                               ("U" . mc/unmark-previous-like-this)
-                               ("s" . mc/skip-to-next-like-this)
-                               ("S" . mc/skip-to-previous-like-this)
-                               ("*"        . 'mc/mark-all-like-this)))
+  '(("C-p"      . 'mc/mark-previous-like-this)
+    ("C-n"      . 'mc/mark-next-like-this)
+    ("u" . mc/unmark-next-like-this)
+    ("U" . mc/unmark-previous-like-this)
+    ("s" . mc/skip-to-next-like-this)
+    ("S" . mc/skip-to-previous-like-this)
+    ("*"        . 'mc/mark-all-like-this)))
 (set-face-foreground 'mode-line "white")
 
 (require 'auto-highlight-symbol)
 (global-auto-highlight-symbol-mode t)
 (ahs-set-idle-interval 0.5)
- 
+
 ;;(require 'rainbow-blocks)
 ;;(global-rainbow-blocks-mode t)
 (menu-bar-mode 0)
@@ -160,4 +160,5 @@
 (eval-after-load 'tern
   '(progn
      (require 'tern-auto-complete)
-           (tern-ac-setup)))
+     (tern-ac-setup)))
+(global-set-key (kbd "C-X C-J") 'mc/edit-lines)
