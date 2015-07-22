@@ -38,6 +38,7 @@
 
 ;;web-mode
 (add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.css$" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.twig$" . web-mode))
 (defun my-web-mode-hook ()
   (setq web-mode-markup-indent-offset 2)
@@ -48,6 +49,12 @@
 
 ;;php-mode
 (add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
+(add-hook 'php-mode-hook
+          '(lambda()
+             (setq tab-width 2)
+             (setq indent-tabs-mode t)
+             (setq c-basic-offset 2)
+                ))
 ;;php-complete
 ;;(add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
 
@@ -104,29 +111,17 @@
 (global-anzu-mode +1)
 
 (require 'smartparens-config)
-
+ 
 (smartparens-global-mode t)
-(defface hlline-face
-  '((((class color)
-      (background dark))
-     (:background "dark slate gray"))
-    (((class color)
-      (background light))
-     (:background "#CC0066"))
-    (t
-     ()))
-  "*Face used by hl-line.")
-(setq hl-line-face 'hlline-face)
+
+
 (global-hl-line-mode)
 
 (show-paren-mode 1)
 (setq show-paren-delay 0)
-(setq show-paren-style 'expression)
-(set-face-attribute 'show-paren-match-face nil
-                    :background nil :foreground nil
-                                        :underline "#ffff00" :weight 'extra-bold)
 
-(require 'multiple-cursors)
+
+;(require 'multiple-cursors)
 (require 'smartrep)
 (declare-function smartrep-define-key "smartrep")
 (global-set-key (kbd "C-M-c") 'mc/edit-lines)
@@ -145,11 +140,24 @@
 (require 'auto-highlight-symbol)
 (global-auto-highlight-symbol-mode t)
 (ahs-set-idle-interval 0.5)
-
-(require 'rainbow-blocks)
-(global-rainbow-blocks-mode t)
+ 
+;;(require 'rainbow-blocks)
+;;(global-rainbow-blocks-mode t)
 (menu-bar-mode 0)
 
 (require 'color-theme)
 (color-theme-initialize)
 (color-theme-clarity)
+
+;;js2-mode
+(autoload 'js2-mode "js2-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
+(add-hook 'js2-mode-hook
+          (lambda ()
+            (tern-mode t)))
+
+(eval-after-load 'tern
+  '(progn
+     (require 'tern-auto-complete)
+           (tern-ac-setup)))
