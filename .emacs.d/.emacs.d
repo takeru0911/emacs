@@ -1,1 +1,0 @@
-/home/maehara/.emacs.d
