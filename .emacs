@@ -170,3 +170,16 @@
      (require 'tern-auto-complete)
      (tern-ac-setup)))
 (global-set-key (kbd "C-X C-J") 'mc/edit-lines)
+
+(add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
+
+;;pytho jedi
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)
+
+(require 'swoop)
+(global-set-key (kbd "C-o")   'swoop)
+(global-set-key (kbd "C-x C-o") 'swoop-multi)
+(global-set-key (kbd "M-o")   'swoop-pcre-regexp)
+(global-set-key (kbd "C-S-o") 'swoop-back-to-last-position)
+(global-set-key (kbd "H-6")   'swoop-migemo) ;; Option for Japanese match
