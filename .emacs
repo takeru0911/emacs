@@ -79,6 +79,7 @@
 (define-key helm-read-file-map (kbd "C-h") 'delete-backward-char)
 (define-key helm-read-file-map (kbd "<tab>") 'helm-execute-persistent-action)
 (define-key global-map (kbd "C-x C-h") 'helm-recentf)
+(global-ace-isearch-mode 1)
 ;;dirtree
 (require 'dirtree)
 
@@ -156,27 +157,27 @@
 (require 'color-theme)
 (color-theme-initialize)
 (color-theme-clarity)
-
+ 
 ;;js2-mode
 (autoload 'js2-mode "js2-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-
+ 
 (add-hook 'js2-mode-hook
           (lambda ()
             (tern-mode t)))
-
+ 
 (eval-after-load 'tern
   '(progn
      (require 'tern-auto-complete)
      (tern-ac-setup)))
 (global-set-key (kbd "C-X C-J") 'mc/edit-lines)
-
+ 
 (add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
-
+ 
 ;;pytho jedi
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:complete-on-dot t)
-
+ 
 (require 'swoop)
 (global-set-key (kbd "C-o")   'swoop)
 (global-set-key (kbd "C-x C-o") 'swoop-multi)
@@ -186,3 +187,31 @@
 
 ;;farm-mode
 (load-theme 'farmhouse-dark t)
+
+;; ミニバッファ履歴リストの最大長：tなら無限
+;;(setq history-length t)
+;;;; session.el
+;;;;   kill-ringやミニバッファで過去に開いたファイルなどの履歴を保存する
+;;(when (require 'session nil t)
+;;  (setq session-initialize '(de-saveplace session keys menus places)
+;;        session-globals-include '((kill-ring 50)
+;;                                  (session-file-alist 500 t)
+;;                                  (file-name-history 10000)))
+;;  (add-hook 'after-init-hook 'session-initialize)
+;;  ;; 前回閉じたときの位置にカーソルを復帰
+;;  (setq session-undo-check -1))
+;;;; minibuf-isearch
+;;;;   minibufでisearchを使えるようにする
+;;(require 'minibuf-isearch nil t)
+;;(require 'migemo)
+;;(setq migemo-command "cmigemo")
+;;(setq migemo-options '("-q" "--emacs"))
+;; 
+;;;; Set your installed path
+;;(setq migemo-dictionary "/usr/local/share/migemo/utf-8/migemo-dict")
+;; 
+;;(setq migemo-user-dictionary nil)
+;;(setq migemo-regex-dictionary nil)
+;;(setq migemo-coding-system 'utf-8-unix)
+;;(load-library "migemo")
+;;(migemo-init)
