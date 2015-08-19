@@ -15,7 +15,7 @@
 (global-set-key "\C-x\1" 'delete-other-windows)
 (global-set-key "\C-x\2" 'split-window)
 (global-set-key "\C-x\3" 'split-window-vertically)
-(global-set-key "\C-x\C-^" 'cua-set-rectangle-mark)
+;(global-set-key "\C-x.\C-^" 'cua-set-rectangle-mark)
 (global-set-key "\C-\\" 'undo)
 (global-set-key "\C-x\j\l" 'goto-line)
 (global-set-key "\C-x\C-c" 'save-buffers-kill-terminal)
@@ -183,3 +183,6 @@
 (global-set-key (kbd "M-o")   'swoop-pcre-regexp)
 (global-set-key (kbd "C-S-o") 'swoop-back-to-last-position)
 (global-set-key (kbd "H-6")   'swoop-migemo) ;; Option for Japanese match
+
+;;farm-mode
+(load-theme 'farmhouse-dark t)
