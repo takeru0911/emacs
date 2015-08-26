@@ -31,6 +31,10 @@
 (require 'yasnippet)
 ;;auto-complete
 (global-auto-complete-mode t)
+(add-hook 'auto-complete-mode-hook
+          (lambda ()
+            (define-key ac-completing-map (kbd "C-n") 'ac-next)
+            (define-key ac-completing-map (kbd "C-p") 'ac-previous)))
 
 ;;realtime-preview
 (autoload 'realtime-preview "realtime-preview" nil t)
@@ -107,6 +111,7 @@
 
 (require 'undo-tree)
 (global-undo-tree-mode t)
+
 (global-set-key (kbd "C-x C-\\") 'undo-tree-redo)
 
 (global-anzu-mode +1)
@@ -157,7 +162,7 @@
 (require 'color-theme)
 (color-theme-initialize)
 (color-theme-clarity)
- 
+
 ;;js2-mode
 (autoload 'js2-mode "js2-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
@@ -215,3 +220,62 @@
 ;;(setq migemo-coding-system 'utf-8-unix)
 ;;(load-library "migemo")
 ;;(migemo-init)
+;;(global-company-mode t)
+(require 'typescript)
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
+;; 
+(require 'tss)
+ 
+;; キーバインド
+(setq tss-popup-help-key "C-q")
+(setq tss-jump-to-definition-key "C-.")
+(setq tss-implement-definition-key "C-x i")
+ 
+(tss-config-default)
+
+;;(require 'tide)
+;;(add-hook 'typescript-mode-hook
+;;            (lambda ()
+;;            (tide-setup)
+;;            (flycheck-mode t)
+;;            (setq flycheck-check-syntax-automatically '(save mode-enabled))
+;;            (eldoc-mode t)
+;;            (company-mode-on)))
+
+;;(require 'company)
+;;;;; C-n, C-pで補完候補を選べるように
+;;(define-key company-active-map (kbd "M-n") nil)
+;;(define-key company-active-map (kbd "M-p") nil)
+;;(define-key company-active-map (kbd "C-n") 'company-select-next)
+;;(define-key company-active-map (kbd "C-p") 'company-select-previous)
+;;;;; C-hがデフォルトでドキュメント表示にmapされているので、文字を消せるようにmapを外す
+;;(define-key company-active-map (kbd "C-h") nil)
+;;;;; 1つしか候補がなかったらtabで補完、複数候補があればtabで次の候補へ行くように
+;;(define-key company-active-map (kbd "<tab>") 'company-complete-common-or-cycle)
+;;;;; ドキュメント表示
+;;(define-key company-active-map (kbd "M-d") 'company-show-doc-buffer)
+;; 
+;;(setq company-minimum-prefix-length 1) ;; 1文字入力で補完されるように
+;; ;;; 候補の一番上でselect-previousしたら一番下に、一番下でselect-nextしたら一番上に行くように
+;;(setq company-selection-wrap-around t)
+;; 
+;;;;; 色の設定。出来るだけ奇抜にならないように
+;;(set-face-attribute 'company-tooltip nil
+;;                    :foreground "black"
+;;                    :background "lightgray")
+;;(set-face-attribute 'company-preview-common nil
+;;                    :foreground "dark gray"
+;;                    :background "black"
+;;                    :underline t)
+;;(set-face-attribute 'company-tooltip-selection nil
+;;                    :background "steelblue"
+;;                    :foreground "white")
+;;(set-face-attribute 'company-tooltip-common nil
+;;                    :foreground "black"
+;;                    :underline t)
+;;(set-face-attribute 'company-tooltip-common-selection nil
+;;                    :foreground "white"
+;;                    :background "steelblue"
+;;                    :underline t)
+;;(set-face-attribute 'company-tooltip-annotation nil
+;;                                        :foreground "red")
