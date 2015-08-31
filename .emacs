@@ -8,6 +8,7 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
 (set-language-environment "Japanese")
+(prefer-coding-system 'utf-8)
 (setq-default c-basic-offset 2)
 ;; set key-bind
 (global-set-key "\C-h" 'delete-backward-char)
@@ -56,7 +57,7 @@
 (add-hook 'php-mode-hook
           '(lambda()
              (setq tab-width 2)
-             (setq indent-tabs-mode t)
+             (setq indent-tabs-mode nil)
              (setq c-basic-offset 2)
              ))
 ;;php-complete
@@ -74,15 +75,18 @@
 (push '(direx:direx-mode :position left :width 25 :dedicated t)
       popwin:special-display-config)
 (global-set-key (kbd "C-x C-d") 'direx:jump-to-directory-other-window)
-(global-set-key (kbd "C-x C-r") 'direx:find-directory)
+;;(global-set-key (kbd "C-x C-r") 'direx:find-directory)
 
 ;;helm
 (require 'helm-config)
+(require 'quickrun)
+(global-set-key (kbd "C-x C-r") 'quickrun)
 (helm-mode 1)
 (custom-set-variables '(helm-ff-auto-update-initial-value nil))
 (define-key helm-read-file-map (kbd "C-h") 'delete-backward-char)
 (define-key helm-read-file-map (kbd "<tab>") 'helm-execute-persistent-action)
 (define-key global-map (kbd "C-x C-h") 'helm-recentf)
+(define-key global-map (kbd "C-x C-m") 'helm-imenu-anywhere)
 (global-ace-isearch-mode 1)
 ;;dirtree
 (require 'dirtree)
@@ -183,12 +187,12 @@
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:complete-on-dot t)
  
-(require 'swoop)
-(global-set-key (kbd "C-o")   'swoop)
-(global-set-key (kbd "C-x C-o") 'swoop-multi)
-(global-set-key (kbd "M-o")   'swoop-pcre-regexp)
-(global-set-key (kbd "C-S-o") 'swoop-back-to-last-position)
-(global-set-key (kbd "H-6")   'swoop-migemo) ;; Option for Japanese match
+;;(require 'swoop)
+;;(global-set-key (kbd "C-o")   'swoop)
+;;(global-set-key (kbd "C-x C-o") 'swoop-multi)
+;;(global-set-key (kbd "M-o")   'swoop-pcre-regexp)
+;;(global-set-key (kbd "C-S-o") 'swoop-back-to-last-position)
+;;(global-set-key (kbd "H-6")   'swoop-migemo) ;; Option for Japanese match
 
 ;;farm-mode
 (load-theme 'farmhouse-dark t)
@@ -279,3 +283,42 @@
 ;;                    :underline t)
 ;;(set-face-attribute 'company-tooltip-annotation nil
 ;;                                        :foreground "red")
+(require 'whitespace)
+(setq whitespace-style '(face           ; faceで可視化
+                         tabs           ; タブ
+                         tab-mark
+                         ))
+(setq whitespace-display-mappings
+      '((tab-mark ?\t [?\u00BB ?\t] [?\\ ?\t])))
+
+(global-whitespace-mode 1)
+
+(defun window-resizer ()
+  "Control window size and position."
+  (interactive)
+  (let ((window-obj (selected-window))
+        (current-width (window-width))
+        (current-height (window-height))
+        (dx (if (= (nth 0 (window-edges)) 0) 1
+              -1))
+        (dy (if (= (nth 1 (window-edges)) 0) 1
+              -1))
+        c)
+    (catch 'end-flag
+      (while t
+        (message "size[%dx%d]"
+                 (window-width) (window-height))
+        (setq c (read-char))
+        (cond ((= c ?l)
+               (enlarge-window-horizontally dx))
+              ((= c ?h)
+               (shrink-window-horizontally dx))
+              ((= c ?j)
+               (enlarge-window dy))
+              ((= c ?k)
+               (shrink-window dy))
+              ;; otherwise
+              (t
+               (message "Quit")
+               (throw 'end-flag t)))))))
+(global-set-key "\C-x\C-o" 'window-resizer)
